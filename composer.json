@@ -1,0 +1,24 @@
+{
+    "name": "espresso-dev/zoom-php",
+    "description": "A simple PHP class for accessing the Zoom API",
+    "keywords": ["zoom", "api"],
+    "homepage": "https://github.com/espresso-dev/zoom-php",
+    "type": "library",
+    "require": {
+        "php": ">=7",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "EspressoDev\\Zoom\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Herman Schutte",
+            "email": "herman@espresso.dev"
+        }
+    ],
+    "minimum-stability": "dev"
+}
