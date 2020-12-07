@@ -110,7 +110,7 @@ class Zoom
         $apiCall = self::API_URL . $function . (('GET' === $method) ? $paramString : null);
 
         $headerData = [
-            'Authorization: Bearer ' . $this->getAccessToken(),
+            'Authorization: Bearer ' . $this->getAccessToken()->access_token,
             'Accept: application/json'
         ];
 
