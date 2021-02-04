@@ -53,6 +53,16 @@ class Zoom
 
         throw new ZoomException("Error: getLoginUrl()");
     }
+    
+    public function createUserMeeting($id, $topic = 'New Meeting', $type = '1', $password = 'MTGPASS', $agenda = 'Start Meeting')
+    {
+        return $this->_makeCall('users/' . $id . '/meetings', compact('topic', 'type', 'password','agenda'), 'POST');
+    }
+    
+    public function getUserInfo($id)
+    {
+        return $this->_makeCall('users/' . $id);
+    }
 
     public function getUserMeetings($id, $type = 'live', $page_size = 30, $page_number = 1)
     {
@@ -122,6 +132,15 @@ class Zoom
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HEADER, true);
+        
+        if ($method === 'POST') {
+        	array_push($headerData, 'Content-Type:application/json');
+        	$data_string = json_encode($params);  
+        
+            curl_setopt($ch, CURLOPT_POST, count($params));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headerData);
+        }
 
         $jsonData = curl_exec($ch);
 
