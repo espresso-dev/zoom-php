@@ -64,6 +64,22 @@ class Zoom
         return $this->_makeCall('users/' . $id . '/webinars', compact('page_size', 'page_number'));
     }
 
+    // For OAuth Server to Server (ZOOM)
+	public function getAccessTokenSS($AccountID) 
+    {
+		$apiData = array(
+			'grant_type' => 'account_credentials',
+			'account_id' => $AccountID
+		);
+
+		$authorization = base64_encode($this->getAppId() . ':' . $this->getAppSecret());
+		$header = ['Authorization: Basic ' . $authorization];
+
+		$result = $this->_makeOAuthCall(self::API_OAUTH_TOKEN_URL, $apiData, 'POST', $header);
+
+		return $result;
+	}
+    
     public function getOAuthToken($code)
     {
         $apiData = array(
